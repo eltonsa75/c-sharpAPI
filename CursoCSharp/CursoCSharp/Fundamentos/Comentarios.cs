@@ -8,5 +8,9 @@ namespace CursoCSharp.Fundamentos
 {
     internal class Comentarios
     {
+        public static void Executar()
+        {
+
+        }
     }
 }
