@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace CursoCSharp.Fundamentos
 {
-    internal class Comentarios
+    internal class NotacaoPonto
     {
         public static void Executar()
         {
-            // Cuidado com os comentários desnecessários
-            Console.WriteLine("Código claro é sempre melhor!");
+
         }
     }
 }
