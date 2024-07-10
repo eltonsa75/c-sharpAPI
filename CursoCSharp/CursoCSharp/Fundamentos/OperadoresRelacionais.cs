@@ -11,7 +11,7 @@ namespace CursoCSharp.Fundamentos
         public static void Executar()
         {
             //double nota = 6.0;
-            Console.WriteLine("Digite a nota: ");
+            Console.Write("Digite a nota: ");
             double.TryParse(Console.ReadLine(), out double nota);
             double notaDecorte = 7.0;
 
