@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CursoCSharp.ClassesEMetodos;
 using CursoCSharp.EstruturasDeControle;
 using CursoCSharp.Fundamentos;
 
@@ -35,6 +36,9 @@ namespace CursoCSharp {
                 {"Estrutura Foreach - Estruturas de Controle", EstruturaForeach.Executar},
                 {"Usando Break - Estruturas de Controle", UsandoBreak.Executar},
                 {"Usando Continue - Estruturas de Controle", UsandoContinue.Executar},
+
+                // Classes e Métodos
+                {"Membros - Classes e Métodos", Membros.Executar},
             });
 
             central.SelecionarEExecutar();
