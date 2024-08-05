@@ -29,5 +29,11 @@ namespace MinhaAPi.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("teste")]
+        public string GetSaudacoes()
+        {
+            return $"{DateTime.Now.ToLongDateString()} - Bem Vindo à MinhaAPI ";
+        }
     }
 }
