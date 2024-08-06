@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CursoCSharp.ClassesEMetodos;
 using CursoCSharp.EstruturasDeControle;
 using CursoCSharp.Fundamentos;
+using static CursoCSharp.ClassesEMetodos.Coordenada;
 
 namespace CursoCSharp {
     class Program {
@@ -50,6 +51,9 @@ namespace CursoCSharp {
                 {"Props - Classes e Métodos", Props.Executar},
                 {"Readonly - Classes e Métodos", Readonly.Executar},
                 {"Enum - Classes e Métodos", ExemploEnum.Executar},
+                {"Struct - Classes e Métodos", ExemploStruct.Executar},
+                {"Struct Vs Classe - Classes e Métodos", StructVsClasse.Executar},
+                {"Valor verso Referencia - Classes e Métodos", ValorVsReferencia.Executar},
             });
 
             central.SelecionarEExecutar();
