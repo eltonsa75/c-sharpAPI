@@ -17,6 +17,19 @@ namespace CursoCSharp.Colecoes
             Nome = nome;
             Preco = preco;
         }
+
+        public override bool Equals(object obj)
+        {
+            var produto = obj as Produto;
+            return produto != null &&
+                Nome == produto.Nome &&
+                Preco == produto.Preco;
+        }
+
+        public override int GetHashCode()
+        {
+            return Nome.Length;
+        }
     }
 
     internal class ColecoesList
