@@ -2,10 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace ApiCatalogo.Models;
 [Table("Categorias")]
 public class Categoria
 {
+    
     public Categoria()
     {
         Produtos = new Collection<Produto>();
