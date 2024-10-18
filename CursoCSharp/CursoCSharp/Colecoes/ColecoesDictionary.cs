@@ -27,6 +27,7 @@ namespace CursoCSharp.Colecoes
 
             Console.WriteLine(filmes.ContainsValue("Amnésia"));
 
+
             Console.WriteLine($"Removeu? {filmes.Remove(2004)}");
 
             filmes.TryGetValue(2006, out string filmes2006);
