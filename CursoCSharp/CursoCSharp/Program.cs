@@ -68,7 +68,7 @@ namespace CursoCSharp {
                 {"Set - Coleções", ColecoesSet.Executar},
                 {"Queue - Coleções", ColecoesQueue.Executar},
                 {"Igualdade - Coleções", Igualdade.Executar},
-                {"Stack - Coleções", ColecoesStack.Executar},                
+                {"Stack - Coleções", ColecoesStack.Executar},
                 {"Dictionary - Coleções", ColecoesDictionary.Executar},
 
                  // OO
@@ -76,6 +76,9 @@ namespace CursoCSharp {
                 {"Construtor This - OO", ConstrutorThis.Executar},
                 {"Encapsulamento - OO", OO.Encapsulamento.Executar},
                 {"Polimorfismo - OO", Polimorfismo.Executar},
+                {"Abstract - OO", Abstract.Executar},
+               
+               
             });
 
             central.SelecionarEExecutar();
