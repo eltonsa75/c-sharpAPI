@@ -84,6 +84,7 @@ namespace CursoCSharp {
 
                 // Métodos & Funções 
                 {"Exemplo Lambda - Método & Funções", ExemploLambda.Executar},
+                {"Lambdas Cmo Delegates - Método & Funções", LambdasDelegate.Executar},
                
                
             });
