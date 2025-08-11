@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCatalogo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240819120339_AjusteTabelas")]
-    partial class AjusteTabelas
+    [Migration("20250810232750_MigracaoInicial")]
+    partial class MigracaoInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

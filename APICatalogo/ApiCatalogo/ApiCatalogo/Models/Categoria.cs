@@ -24,3 +24,4 @@ public class Categoria
     // Relacionamento um para muitos
     public ICollection<Produto>? Produtos { get; set; }
 }
+
