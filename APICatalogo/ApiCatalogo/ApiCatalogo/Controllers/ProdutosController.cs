@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalogo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // Produtos
     [ApiController]
     public class ProdutosController : ControllerBase
     {
@@ -19,9 +19,9 @@ namespace ApiCatalogo.Controllers
 
         // GET: api/Produtos
         [HttpGet]
-        public ActionResult<IEnumerable<Produto>> Get()
+        public async Task<ActionResult<IEnumerable<Produto>>> Get()
         {
-            var produtos = _context.Produtos.ToList();
+            var produtos = await _context.Produtos.AsNoTracking().ToListAsync();
             if (produtos is null)
             {
                 return NotFound("Produtos não encontrados...");
@@ -29,13 +29,28 @@ namespace ApiCatalogo.Controllers
             return produtos;
         }
 
-        // GET: api/Produtos/id
+        // /api/produtos/primeiro
 
-        [HttpGet("{id:int}", Name = "ObterProduto")]
-
-        public ActionResult<Produto> Get(int id)
+        [HttpGet("primeiro")]
+        public ActionResult <Produto> GetPrimeiro()
         {
-            var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+            var produtos = _context.Produtos.FirstOrDefault();
+            if (produtos is null)
+            {
+                return NotFound("Produtos não encontrados...");
+            }
+            return produtos;
+        }
+
+        // GET: api/Produtos/1
+
+        [HttpGet("{id:int:min(1)}", Name = "ObterProduto")]
+
+        public async Task<ActionResult<Produto>> Get(int id)
+        {
+            var produto = await _context.Produtos.AsNoTracking()
+                .FirstOrDefaultAsync(p => p.ProdutoId == id);
+
             if (produto is null)
             {
                 return NotFound("Produto não encontrado...");
