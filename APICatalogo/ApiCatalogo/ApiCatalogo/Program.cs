@@ -2,6 +2,7 @@ using ApiCatalogo.Context;
 using ApiCatalogo.Extensions;
 using ApiCatalogo.Filters;
 using ApiCatalogo.Interface;
+using ApiCatalogo.Repositories;
 using ApiCatalogo.Repository;
 using ApiCatalogo.Service;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,8 @@ builder.Services.AddScoped<ApiLoggingFilter>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Logging.AddProvider(new ApiCatalogo.Logging.CustomLoggerProvider(
     new ApiCatalogo.Logging.CustomLoggerProviderConfiguration
