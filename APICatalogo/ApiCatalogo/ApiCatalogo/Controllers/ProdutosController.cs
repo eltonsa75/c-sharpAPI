@@ -1,4 +1,5 @@
 ﻿using ApiCatalogo.Context;
+using ApiCatalogo.DTOs;
 using ApiCatalogo.Models;
 using ApiCatalogo.Repositories;
 using ApiCatalogo.Repository;
@@ -23,7 +24,7 @@ namespace ApiCatalogo.Controllers
 
         [HttpGet("produtos/{id}")]
 
-        public ActionResult<IEnumerable<Produto>> GetProdutosPorCategoria(int id)
+        public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosPorCategoria(int id)
         {
             var produtos = _uof.ProdutoRepository.GetProdutosPorCategorias(id);
             if (produtos is null)
@@ -35,7 +36,7 @@ namespace ApiCatalogo.Controllers
 
         // GET: api/Produtos
         [HttpGet]
-        public ActionResult<IEnumerable<Produto>> Get()
+        public ActionResult<IEnumerable<ProdutoDTO>> Get()
         {
             var produtos = _uof.ProdutoRepository.GetAll();
             if (produtos is null)
@@ -49,7 +50,7 @@ namespace ApiCatalogo.Controllers
 
         [HttpGet("{id}", Name = "ObterProduto")]
 
-        public ActionResult<Produto> Get(int id)
+        public ActionResult<ProdutoDTO> Get(int id)
         {
             var produto = _uof.ProdutoRepository.Get(c=> c.ProdutoId == id);
              if (produto is null)
@@ -61,9 +62,9 @@ namespace ApiCatalogo.Controllers
 
         // POST: api/Produtos
         [HttpPost]
-        public ActionResult Post(Produto produto)
+        public ActionResult<ProdutoDTO> Post(ProdutoDTO produtoDto)
         {
-            if (produto is null)
+            if (produtoDto is null)
             {
                 return BadRequest();
             }
@@ -77,9 +78,9 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public  ActionResult Put(int id, Produto produto)
+        public  ActionResult<ProdutoDTO> Put(int id, ProdutoDTO produtoDto)
         {
-           if(id != produto.ProdutoId)
+           if(id != produtoDto.ProdutoId)
             {
                 return BadRequest();
             }
@@ -92,7 +93,7 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult Delete(int id)
+        public ActionResult<ProdutoDTO> Delete(int id)
         {
           var produto = _uof.ProdutoRepository.Get(p=> p.ProdutoId == id);
             if (produto is null)

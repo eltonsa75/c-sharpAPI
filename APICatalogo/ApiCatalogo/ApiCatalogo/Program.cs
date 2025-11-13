@@ -1,4 +1,5 @@
 using ApiCatalogo.Context;
+using ApiCatalogo.DTOs.Mappings;
 using ApiCatalogo.Extensions;
 using ApiCatalogo.Filters;
 using ApiCatalogo.Interface;
@@ -49,6 +50,7 @@ builder.Logging.AddProvider(new ApiCatalogo.Logging.CustomLoggerProvider(
         LogLevel = LogLevel.Information
     }));
 
+builder.Services.AddAutoMapper(typeof(ProdutoDTOMappingProfile));
 
 
 var app = builder.Build();
