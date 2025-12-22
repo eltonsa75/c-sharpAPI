@@ -1,47 +1,40 @@
-﻿
-using System.IO;
+﻿namespace APICatalogo.Logging;
 
-namespace ApiCatalogo.Logging
+public class CustomerLogger : ILogger
 {
-    public class CustomerLogger : ILogger
+    readonly string loggerName;
+    readonly CustomLoggerProviderConfiguration loggerConfig;
+
+    public CustomerLogger(string name, CustomLoggerProviderConfiguration config)
     {
+        loggerName = name;
+        loggerConfig = config;
+    }
 
-        readonly string loggerName;
+    public IDisposable BeginScope<TState>(TState state)
+    {
+        return null;
+    }
 
-        readonly CustomLoggerProviderConfiguration loggerConfig;
+    public bool IsEnabled(LogLevel logLevel)
+    {
+        return logLevel == loggerConfig.LogLevel;
+    }
 
-        public CustomerLogger(string name, CustomLoggerProviderConfiguration config)
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state,
+            Exception exception, Func<TState, Exception, string> formatter)
+    {
+        string mensagem = $"{logLevel.ToString()}: {eventId.Id} - {formatter(state, exception)}";
+
+        EscreverTextoNoArquivo(mensagem);
+    }
+
+    private void EscreverTextoNoArquivo(string mensagem)
+    {
+        string caminhoArquivoLog = "C:\\Logs\\Elton_log.txt";
+        using (StreamWriter streamWriter = new StreamWriter(caminhoArquivoLog, true))
         {
-            loggerName = name;
-            loggerConfig = config;
-        }
-
-
-        public bool IsEnabled(LogLevel logLevel)
-        {
-            return logLevel == loggerConfig.LogLevel;
-        }
-
-        public IDisposable BeginScope<Tstate>(Tstate state)
-        {
-            return null;
-        }
-
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-        {
-            string mensagem = $"{logLevel.ToString()}: {eventId.Id} - {formatter(state, exception)}";
-
-            EscreverTextoNoArquivo(mensagem);
-        }
-
-        private void EscreverTextoNoArquivo(string mensagem)
-        {
-            string caminhoArquivoLog = "C:\\Logs\\Elton_log.txt";
-
-            using StreamWriter streamWriter = new StreamWriter(caminhoArquivoLog, true);
-            {
-
-                         try
+            try
             {
                 streamWriter.WriteLine(mensagem);
                 streamWriter.Close();
@@ -50,8 +43,6 @@ namespace ApiCatalogo.Logging
             {
                 throw;
             }
-        }
-
         }
     }
 }

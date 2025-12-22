@@ -1,32 +1,26 @@
-﻿using ApiCatalogo.Context;
-using ApiCatalogo.Models;
-using ApiCatalogo.Pagination;
-using ApiCatalogo.Repositories;
-using System.Reflection.Metadata.Ecma335;
+﻿using APICatalogo.Context;
+using APICatalogo.Models;
+using APICatalogo.Pagination;
 
-namespace ApiCatalogo.Repository
+namespace APICatalogo.Repositories;
+
+public class ProdutoRepository : Repository<Produto>, IProdutoRepository
 {
-    public class ProdutoRepository : Repository<Produto>, IProdutoRepository
+    public ProdutoRepository(AppDbContext context): base(context)
     {       
+    }
 
-        public ProdutoRepository(AppDbContext context) : base(context)
-        {
-            
-        }
+    public IEnumerable<Produto> GetProdutos(ProdutosParameters produtosParams)
+    {
+        return GetAll()
+            .OrderBy(p => p.Nome)
+            .Skip((produtosParams.PageNumber - 1) * produtosParams.PageSize)
+            .Take(produtosParams.PageSize).ToList();
 
-        public IEnumerable<Produto> GetProdutos(ProdutosParameters produtosParams)
-        {
-            return GetAll()
-                 .OrderBy(p => p.Nome)
-                 .Skip((produtosParams.PageNumber - 1) * produtosParams.PageSize)
-                 .Take(produtosParams.PageSize).ToList();
+    }
 
-        }
-
-        public IEnumerable<Produto> GetProdutosPorCategorias(int id)
-        {
-            return GetAll().Where(p => p.CategoriaId == id);
-        }
-
+    public IEnumerable<Produto> GetProdutosPorCategoria(int id)
+    {
+        return GetAll().Where(c => c.CategoriaId == id);
     }
 }

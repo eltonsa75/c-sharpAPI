@@ -1,11 +1,7 @@
-﻿using ApiCatalogo.Models;
-using ApiCatalogo.Repositories;
+﻿using APICatalogo.Models;
 
-namespace ApiCatalogo.Interface
+namespace APICatalogo.Repositories;
+
+public interface ICategoriaRepository : IRepository<Categoria>
 {
-    public interface ICategoriaRepository : IRepository<Categoria>
-    {
-       
-
-    }
 }

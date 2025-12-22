@@ -1,47 +1,44 @@
-﻿using ApiCatalogo.Context;
-using ApiCatalogo.Interface;
-using ApiCatalogo.Repository;
+﻿using APICatalogo.Context;
 
-namespace ApiCatalogo.Repositories
+namespace APICatalogo.Repositories;
+
+public class UnitOfWork : IUnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    private IProdutoRepository? _produtoRepo;
+    private ICategoriaRepository? _categoriaRepo;
+
+    public AppDbContext _context;
+    public UnitOfWork(AppDbContext context)
     {
-        private IProdutoRepository? _produtoRepo;
+        _context = context;
+    }
 
-        private ICategoriaRepository? _categoriaRepo;
-
-        public AppDbContext _context;
-
-        public UnitOfWork(AppDbContext context)
+    public IProdutoRepository ProdutoRepository
+    {
+        get
         {
-            _context = context;
+            return _produtoRepo = _produtoRepo ?? new ProdutoRepository(_context);
+            //if (_produtoRepo == null)
+            //{
+            //    _produtoRepo = new ProdutoRepository(_context);
+            //}
+            //return _produtoRepo;
         }
-
-        public IProdutoRepository ProdutoRepository
+    }
+    public ICategoriaRepository CategoriaRepository
+    {
+        get
         {
-            get
-            {
-                return _produtoRepo = _produtoRepo ?? new ProdutoRepository(_context);
-            }
+            return _categoriaRepo = _categoriaRepo ?? new CategoriaRepository(_context);
         }
+    }
+    public void Commit()
+    {
+        _context.SaveChanges();
+    }
 
-        public ICategoriaRepository CategoriaRepository
-        {
-            get
-            {
-                return _categoriaRepo = _categoriaRepo ?? new CategoriaRepository(_context);
-            }
-        }
-
-        public void Commit()
-        {
-            _context.SaveChanges();
-        }
-
-        public void Dispose() 
-        {
-            _context.Dispose();
-        }
-
+    public void Dispose()
+    {
+        _context.Dispose();
     }
 }

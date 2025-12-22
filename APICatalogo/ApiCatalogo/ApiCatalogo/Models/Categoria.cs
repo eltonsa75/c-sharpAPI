@@ -3,12 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
+namespace APICatalogo.Models;
 
-namespace ApiCatalogo.Models;
 [Table("Categorias")]
 public class Categoria
 {
-    
     public Categoria()
     {
         Produtos = new Collection<Produto>();
@@ -23,9 +22,6 @@ public class Categoria
     [Required]
     [StringLength(300)]
     public string? ImagemUrl { get; set; }
-
-    // Relacionamento um para muitos
-   [JsonIgnore]
+    [JsonIgnore]
     public ICollection<Produto>? Produtos { get; set; }
 }
-
