@@ -42,6 +42,28 @@ Por fim, os tópicos avançados abordam recursos sofisticados, como generics, LI
 
 Este percurso proporciona uma visão ampla e prática sobre o C#, preparando o desenvolvedor para enfrentar os desafios do mercado com uma base sólida em algoritmos, estruturas de dados e técnicas avançadas da linguagem.
 
+
+### Alternativas ao AutoMapper 
+
+Mapeamento Manual,
+Usando projeto LINQ,
+Usando métodos de extensão
+
+## TinyMapper - (É uma biblioteca leve e de alto desempenho para mapeamento de objetos na plataforma.NET)
+
+Vantagens:
+
+Muito mais rápido que AutoMapper.
+
+Código pequeno e fácil de entender.
+
+Desvantagens:
+
+Poucos recursos avançados.
+
+Pode não entender a cenários complexos.
+
+
 # 💻 Tech Stack:
 
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)

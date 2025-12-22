@@ -1,6 +1,7 @@
 ﻿using ApiCatalogo.Context;
 using ApiCatalogo.DTOs;
 using ApiCatalogo.Models;
+using ApiCatalogo.Pagination;
 using ApiCatalogo.Repositories;
 using ApiCatalogo.Repository;
 using AutoMapper;
@@ -40,6 +41,16 @@ namespace ApiCatalogo.Controllers
             // var destino = _mapper.Map<Destino>(origem);
             var produtosDto = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos);
             return Ok(produtosDto);
+        }
+
+        [HttpGet("pagination")]
+        public ActionResult<IEnumerable<ProdutoDTO>> Get([FromQuery]ProdutosParameters produtosParameters)
+        {
+            var produtos = _uof.ProdutoRepository.GetProdutos(produtosParameters);
+
+            var produtoDto = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos);
+
+            return Ok(produtoDto);
         }
 
         // GET: api/Produtos
@@ -90,6 +101,34 @@ namespace ApiCatalogo.Controllers
             return new CreatedAtRouteResult("ObterProduto",
                 new { id = novoProdutoDto.ProdutoId }, novoProdutoDto);
 
+        }
+
+
+        [HttpPatch("{id}/UpdatePartial")]
+        public ActionResult<ProdutoDTOUpdateResponse> Patch(int id, JsonPatchDocument<ProdutoDTOUpadetRequest> patchProdutoDTO)
+        {
+            if(patchProdutoDTO is null || id <= 0)
+                return BadRequest();
+
+            var produto = _uof.ProdutoRepository.Get(c=> c.ProdutoId == id);
+
+            if (produto is null)
+                return NotFound();
+
+            var produtoUpdateRequest = _mapper.Map<ProdutoDTOUpadetRequest>(produto);
+
+            patchProdutoDTO.ApplyTo(produtoUpdateRequest,ModelState);
+
+            if (!ModelState.IsValid || !TryValidateModel(produtoUpdateRequest))
+                return BadRequest(ModelState);
+
+            // Mapeando o objeto
+            _mapper.Map(produtoUpdateRequest, produto);
+
+            _uof.ProdutoRepository.Update(produto);
+            _uof.Commit();
+
+            return Ok(_mapper.Map<ProdutoDTOUpdateResponse>(produto));
         }
 
         [HttpPatch("{id}/UpdatePartial")]
