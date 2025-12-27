@@ -3,16 +3,15 @@ using System;
 using APICatalogo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ApiCatalogo.Migrations
+namespace APICatalogo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250810234043_AjusteTabelas")]
+    [Migration("20230820143527_AjusteTabelas")]
     partial class AjusteTabelas
     {
         /// <inheritdoc />
@@ -20,18 +19,14 @@ namespace ApiCatalogo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("ApiCatalogo.Models.Categoria", b =>
+            modelBuilder.Entity("APICatalogo.Models.Categoria", b =>
                 {
                     b.Property<int>("CategoriaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("CategoriaId"));
 
                     b.Property<string>("ImagemUrl")
                         .IsRequired()
@@ -48,13 +43,11 @@ namespace ApiCatalogo.Migrations
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("ApiCatalogo.Models.Produto", b =>
+            modelBuilder.Entity("APICatalogo.Models.Produto", b =>
                 {
                     b.Property<int>("ProdutoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ProdutoId"));
 
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
@@ -90,9 +83,9 @@ namespace ApiCatalogo.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("ApiCatalogo.Models.Produto", b =>
+            modelBuilder.Entity("APICatalogo.Models.Produto", b =>
                 {
-                    b.HasOne("ApiCatalogo.Models.Categoria", "Categoria")
+                    b.HasOne("APICatalogo.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -101,7 +94,7 @@ namespace ApiCatalogo.Migrations
                     b.Navigation("Categoria");
                 });
 
-            modelBuilder.Entity("ApiCatalogo.Models.Categoria", b =>
+            modelBuilder.Entity("APICatalogo.Models.Categoria", b =>
                 {
                     b.Navigation("Produtos");
                 });

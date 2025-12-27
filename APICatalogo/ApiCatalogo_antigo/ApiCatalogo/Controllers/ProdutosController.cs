@@ -22,7 +22,7 @@ public class ProdutosController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet("produtos/{id}")]
+    [HttpGet("produtos_tste/{id}")]
     public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosCategoria(int id)
     {
         var produtos = _uof.ProdutoRepository.GetProdutosPorCategoria(id);
@@ -37,8 +37,8 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet("pagination")]
-    public ActionResult<IEnumerable<ProdutoDTO>> Get(
-     [FromQuery] ProdutosParameters produtosParameters)
+    public ActionResult<IEnumerable<ProdutoDTO>> Get ([FromQuery] 
+                                   ProdutosParameters produtosParameters)
     {
         var produtos = _uof.ProdutoRepository.GetProdutos(produtosParameters);
 
@@ -46,22 +46,18 @@ public class ProdutosController : ControllerBase
         {
             produtos.TotalCount,
             produtos.PageSize,
-            produtos.CurrentPage,
+            produtos.Currentpage,
             produtos.TotalPages,
             produtos.HasNext,
             produtos.HasPrevious
         };
 
-        Response.Headers.Append(
-            "X-Pagination",
-            JsonConvert.SerializeObject(metadata)
-        );
+        Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
 
         var produtosDto = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos);
 
         return Ok(produtosDto);
     }
-
 
     [HttpGet]
     public ActionResult<IEnumerable<ProdutoDTO>> Get()

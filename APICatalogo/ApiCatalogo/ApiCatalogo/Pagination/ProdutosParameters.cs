@@ -4,7 +4,7 @@ public class ProdutosParameters
 {
     const int maxPageSize = 50;
     public int PageNumber { get; set; } = 1;
-    private int _pageSize;
+    private int _pageSize = 10;
     public int PageSize
     {
         get
@@ -13,7 +13,7 @@ public class ProdutosParameters
         }
         set
         {
-            _pageSize= (value > maxPageSize)? maxPageSize : value;
+            _pageSize = (value > maxPageSize) ? maxPageSize : value;
         }
     }    
 }
